@@ -1,0 +1,91 @@
+:root {
+	--primary: #D81E5B;
+	--secondary: #8A4EFC;
+	--light: #EEE;
+	--light-alt: #61759b;
+	--dark: #131A26;
+	--dark-alt: #202B3E;
+}
+body {
+	background-color: var(--dark-alt);
+	color: var(--light);
+}
+.node {
+  width: 25px;
+  height: 25px;
+  outline: 1px solid var(--light-alt);
+  display: inline-block;
+}
+
+.node-finish {
+  background-color: red;
+}
+
+.node-start {
+  background-color: green;
+}
+
+.node-visited {
+  animation-name: visitedAnimation;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+@keyframes visitedAnimation {
+  0% {
+    transform: scale(0.3);
+    background-color: lightpink;
+    border-radius: 100%;
+  }
+
+  50% {
+    background-color: pink;
+  }
+
+  75% {
+    transform: scale(1.2);
+    background-color: rgb(247, 114, 114);
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: rgb(247, 80, 80);
+  }
+}
+
+.node-wall {
+  background-color: var(--light);
+}
+
+.node-shortest-path {
+  animation-name: shortestPath;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+@keyframes shortestPath {
+  0% {
+    transform: scale(0.6);
+    background-color: rgb(255, 254, 106);
+  }
+
+  50% {
+    transform: scale(1.2);
+    background-color: rgb(255, 254, 106);
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: rgb(255, 254, 106);
+  }
+}
