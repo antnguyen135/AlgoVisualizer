@@ -7,18 +7,24 @@
 	--dark-alt: #202B3E;
 }
 .grid {
-  margin: 100px 0 0;
+	margin: auto;
+	margin-top: 40px;
+	width: 60%;
 }
 
 .button {
 	padding: 10px 20px;
 	border-radius: 999px;
 	background-color: var(--primary);
-  color: var(--light);
+  	color: var(--light);
 	font-weight: 700;
 	text-transform: uppercase;
 	margin-top: 30px;
 	text-align: center;
 	cursor: pointer;
   
+}
+.allButtons {
+	margin: auto;
+	width: 60%;
 }

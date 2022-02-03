@@ -13,12 +13,14 @@ body {
 .node {
   width: 25px;
   height: 25px;
-  outline: 1px solid var(--light-alt);
+  margin:0;
+  margin-bottom: -1.75px;
+  outline: 0.25px solid var(--light-alt);
   display: inline-block;
 }
 
 .node-finish {
-  background-color: red;
+  background-color: rgb(150, 3, 118);
 }
 
 .node-start {
@@ -57,9 +59,30 @@ body {
     background-color: rgb(247, 80, 80);
   }
 }
-
 .node-wall {
-  background-color: var(--light);
+  animation-name: wallAnimation;
+  animation-duration: .5s;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+@keyframes wallAnimation {
+  0% {
+    transform: scale(0.6);
+    background-color: var(--light-alt);
+  }
+
+  50% {
+    transform: scale(0.8);
+    background-color: var(--light-alt);
+  }
+
+  100% {
+    transform: scale(1.0);
+    background-color: var(--light-alt);
+  }
 }
 
 .node-shortest-path {

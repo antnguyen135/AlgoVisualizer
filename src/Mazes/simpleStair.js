@@ -2,15 +2,18 @@ export const stairs = (grid) => {
     let newGrid = grid.slice();
     let col = 0;
     let row = 29;
-    while(col < 50 && row > 0){
+    let wallsToAnimate = [];
+    while(col < newGrid[0].length && row > 0){
       newGrid[row][col].isWall = true;
+      wallsToAnimate.push(newGrid[row][col]);
         row--;
         col++;
     }
-    while(row < 30 && col < 50){
+    while(row < newGrid.length && col < 50){
       newGrid[row][col].isWall = true;
+      wallsToAnimate.push(newGrid[row][col]);
         row++;
         col++;
     }
-    return newGrid
+    return wallsToAnimate;
   };

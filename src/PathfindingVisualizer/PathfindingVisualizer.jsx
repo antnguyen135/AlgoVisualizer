@@ -4,14 +4,16 @@ import {dijkstra, getNodesInShortestPathOrder} from '../algorithms/dijkstra';
 import {DFS, getNodesInShortestPathOrderDFS} from '../algorithms/DFS';
 import {BFS, getNodesInShortestPathOrderBFS} from '../algorithms/BFS';
 import {stairs} from '../Mazes/simpleStair';
+import { mazeGenerate } from '../animate/mazeAnimate';
 import './PathfindingVisualizer.css';
+import { recursiveMaze, wallsToAnimateRec} from '../Mazes/recursiveMaze';
 
 const START_NODE_ROW = 10;
 const START_NODE_COL = 15;
 const FINISH_NODE_ROW = 10;
 const FINISH_NODE_COL = 35;
-let speedAnimatePath = 50;
-let speedAnimatealgo = 10;
+export let speedAnimatePath = 50;
+export let speedAnimatealgo = 10;
 export default class PathfindingVisualizer extends Component {
   constructor() {
     super();
@@ -21,17 +23,22 @@ export default class PathfindingVisualizer extends Component {
     };
   }
 
-  
- getStairGrid = (grid) => {
-  const newGrid = stairs(this.state.grid);
-  this.setState({grid:newGrid});
-};
-
+  getStairGrid(){
+    let wallsToAnimate = stairs(this.state.grid);
+    mazeGenerate(wallsToAnimate);
+  }
+   getRecursiveMaze(Orientation){ //(grid, rowStart, rowEnd, colStart, colEnd, orientation, outerWalls)   
+    recursiveMaze(this.state.grid,2,27,2,47,Orientation, false);
+    mazeGenerate(wallsToAnimateRec);
+   }
   componentDidMount() {
     const grid = getInitialGrid();
     this.setState({grid});
   }
-
+  resetBoard(grid){
+    const newGrid = resetGrid(this.state.grid);
+    this.setState({newGrid});
+  }
   handleMouseDown(row, col) {
     const newGrid = getNewGridWithWallToggled(this.state.grid, row, col);
     this.setState({grid: newGrid, mouseIsPressed: true});
@@ -147,6 +154,7 @@ export default class PathfindingVisualizer extends Component {
 
     return (
       <>
+        <div className = "allButtons">
         <div className = "topButtons">
         <button className = "button" onClick={() => this.visualizeDijkstra()}>
           Visualize Dijkstra's Algorithm
@@ -162,6 +170,13 @@ export default class PathfindingVisualizer extends Component {
           <button className = "button" onClick={() => this.getStairGrid()}>
           Simple Stair
         </button>
+        <button className = "button" onClick={() => this.getRecursiveMaze("Horizontal")}>
+          Horizontal Recursive Maze
+        </button>
+        <button className = "button" onClick={() => this.getRecursiveMaze("Vertical")}>
+          Vertical Recursive Maze
+        </button>
+        </div>
         </div>
         <div className="grid">
           {grid.map((row, rowIdx) => {
@@ -216,6 +231,16 @@ const getInitialGrid = () => {
     grid.push(currentRow);
   }
   return grid;
+};
+const resetGrid = (grid) =>{
+  let newGrid = grid.slice();
+  for (let row = 0; row < 50; row++) {
+    for (let col = 0; col < 75; col++) {
+      newGrid[row][col] = createNode(col,row);
+      newGrid[row][col].id = "node";
+    }
+  }
+  return newGrid
 };
 
 const createNode = (col, row) => {
