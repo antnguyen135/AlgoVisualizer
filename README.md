@@ -15,3 +15,5 @@ Here is the recursively built horizontal maze which always has a unique construc
 <img src = "images/mazeMiddle.png" width="500"> <img src = "images/mazeEnd.png" width="500"> <br />
 Another horizontal maze to show Uniqueness <br />
 <img src = "images/mazeEnd2.png" width="500"> <br />
+Finally, here is the result Dijkstra's algorithm being run on the second horizontal maze <br />
+<img src = "images/mazeDijResult.png" width="500"> <br />
