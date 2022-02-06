@@ -1,5 +1,5 @@
 export let wallsToAnimateRec = [];
-export const recursiveMaze = (grid, rowStart, rowEnd, colStart, colEnd, orientation, outerWalls) => {
+export const recursiveMaze = (grid, rowStart, rowEnd, colStart, colEnd, orientation, outerWalls,gridRow,gridCol) => {
   if(rowEnd < rowStart || colEnd < colStart){
     return;
   }
@@ -8,7 +8,7 @@ export const recursiveMaze = (grid, rowStart, rowEnd, colStart, colEnd, orientat
   if(outerWalls === false){
     for(let r = 0; r < newGrid.length; r++){
       for(let c = 0; c < newGrid[0].length; c++){
-        if (r === 0 || c === 0 || r === 29 || c === 49) {
+        if (r === 0 || c === 0 || r === gridRow-1 || c === gridCol-1) {
           wallsToAnimateRec.push(newGrid[r][c]);
           newGrid[r][c].isWall = true;
         }
