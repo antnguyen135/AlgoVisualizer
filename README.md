@@ -13,7 +13,7 @@ Users also have the ability to create barriers by clicking and dragging the mous
 Here are diagrams of the options<br />
 Simple stair<br />
 <img src = "images/simpleStair.png" width="500"> <br />
-Here is the recursively built horizontal maze which always has a unique construction<br />
+Here are pictures of the recursively built horizontal maze during animation and the final result<br />
 <img src = "images/maze1Build.png" width="500"> <img src = "images/maze1.png" width="500"> <br />
 Another horizontal maze to show Uniqueness <br />
 <img src = "images/maze2.png" width="500"> <br />
