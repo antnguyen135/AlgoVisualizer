@@ -1,6 +1,6 @@
 # AlgoVisualizer
 # Description
-Visualizer for various algorithms: DFS, BFS, DIJKSTRAS
+Visualizer for various algorithms: A*,DFS, BFS, DIJKSTRAS
 # Demo
 When the user enters they see this home page.
 <img src = "images/newBlank.png" width="1000"> 
