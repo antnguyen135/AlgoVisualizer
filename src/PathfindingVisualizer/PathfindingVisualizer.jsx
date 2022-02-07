@@ -7,7 +7,7 @@ import {stairs} from '../Mazes/simpleStair';
 import { mazeGenerate } from '../animate/mazeAnimate';
 import './PathfindingVisualizer.css';
 import { recursiveMaze, wallsToAnimateRec} from '../Mazes/recursiveMaze';
-
+import { Astar, getNodesInShortestPathOrderAstar } from '../algorithms/Astar';
 const gridRow = 31;
 const gridCol = 60;
 const START_NODE_ROW = 10;
@@ -42,10 +42,10 @@ export default class PathfindingVisualizer extends Component {
     const newGrid = resetGrid(this.state.grid);
     this.setState({grid:newGrid});
   }
-  // resetBoardPaths(){
-  //   const newGrid = resetPaths(this.state.grid);
-  //   this.setState({grid:newGrid});
-  // }
+  resetBoardPaths(){
+    const newGrid = resetPaths(this.state.grid);
+    this.setState({grid:newGrid});
+  }
   resetBoardWeightsAndWalls(){
     const newGrid = resetWeightsAndWall(this.state.grid);
     this.setState({grid:newGrid});
@@ -158,6 +158,32 @@ export default class PathfindingVisualizer extends Component {
       }, speedAnimatealgo * i);
     }
   }
+
+  visualizeAstar() {
+    const {grid} = this.state;
+    const startNode = grid[START_NODE_ROW][START_NODE_COL];
+    const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+    const visitedNodesInOrder = Astar(grid, startNode, finishNode);
+    const nodesInShortestPathOrder = getNodesInShortestPathOrderAstar(finishNode);
+    this.animateAstar(visitedNodesInOrder, nodesInShortestPathOrder);
+  }
+
+  animateAstar(visitedNodesInOrder, nodesInShortestPathOrder) {
+    for (let i = 0; i <= visitedNodesInOrder.length; i++) {
+      if (i === visitedNodesInOrder.length) {
+        setTimeout(() => {
+          this.animateShortestPath(nodesInShortestPathOrder);
+        }, speedAnimatealgo * i);
+        return;
+      }
+      setTimeout(() => {
+        const node = visitedNodesInOrder[i];
+        document.getElementById(`node-${node.row}-${node.col}`).className =
+          'node node-visited';
+      }, speedAnimatealgo * i);
+    }
+  }
+
   setSpeedFast(){
     speedAnimatePath = 50;
     speedAnimatealgo = 10;
@@ -202,6 +228,9 @@ export default class PathfindingVisualizer extends Component {
       <>
         <div className = "allButtons">
         <div className = "topButtons">
+        <button className = "button" onClick={() => this.visualizeAstar()}>
+          Visualize Astar
+        </button>
         <button className = "button" onClick={ () => this.visualizeDijkstra()}>
           Visualize Dijkstra's Algorithm
         </button>
@@ -211,6 +240,7 @@ export default class PathfindingVisualizer extends Component {
         <button className = "button" onClick={() => this.visualizeBFS()}>
           Visualize BFS
         </button>
+        
         </div>
         <div className = "mazeButtons">
           <button className = "button" onClick={() => this.getStairGrid()}>
@@ -316,37 +346,37 @@ const resetGrid = (grid) =>{
   return newGrid
 };
 
-// const resetPaths = (grid) =>{
-//   let newGrid = grid.slice();
-//   for (let row = 0; row < gridRow; row++) {
-//     for (let col = 0; col < gridCol; col++) {
-//         if(row === START_NODE_ROW && col === START_NODE_COL){
-//           document.getElementById(`node-${row}-${col}`).className ='node node-start';
-//           newGrid[row][col].isVisited =false;
-//         }
-//         else if(row === FINISH_NODE_ROW && col === FINISH_NODE_COL){
-//           document.getElementById(`node-${row}-${col}`).className ='node node-finish';
-//           newGrid[row][col].isVisited =false;
-//         }
-//         else if(!grid[row][col].isWeight && !grid[row][col].isWall){
-//         document.getElementById(`node-${row}-${col}`).className ='node';
-//         newGrid[row][col].isWall =false;
-//         newGrid[row][col].isWeight =false;
-//         newGrid[row][col].isVisited =false;}
-//         else if(grid[row][col].isWeight || grid[row][col].isWall){
-//           newGrid[row][col].isVisited =false;
-//           if(grid[row][col].isWall){
-//             document.getElementById(`node-${row}-${col}`).className ='node node-wall';
-//           }
-//           if(grid[row][col].isWeight){
-//             document.getElementById(`node-${row}-${col}`).className ='node node-weight';
-//           }
-//           }
-//     }
+const resetPaths = (grid) =>{
+  let newGrid = grid.slice();
+  for (let row = 0; row < gridRow; row++) {
+    for (let col = 0; col < gridCol; col++) {
+        if(row === START_NODE_ROW && col === START_NODE_COL){
+          document.getElementById(`node-${row}-${col}`).className ='node node-start';
+          newGrid[row][col].isVisited =false;
+        }
+        else if(row === FINISH_NODE_ROW && col === FINISH_NODE_COL){
+          document.getElementById(`node-${row}-${col}`).className ='node node-finish';
+          newGrid[row][col].isVisited =false;
+        }
+        else if(!grid[row][col].isWeight && !grid[row][col].isWall){
+        document.getElementById(`node-${row}-${col}`).className ='node';
+        newGrid[row][col].isWall =false;
+        newGrid[row][col].isWeight =false;
+        newGrid[row][col].isVisited =false;}
+        else if(grid[row][col].isWeight || grid[row][col].isWall){
+          newGrid[row][col].isVisited =false;
+          if(grid[row][col].isWall){
+            document.getElementById(`node-${row}-${col}`).className ='node node-wall';
+          }
+          if(grid[row][col].isWeight){
+            document.getElementById(`node-${row}-${col}`).className ='node node-weight';
+          }
+          }
+    }
     
-//   }
-//   return newGrid
-// };
+  }
+  return newGrid
+};
 const resetWeights = (grid) =>{
   let newGrid = grid.slice();
   for (let row = 0; row < gridRow; row++) {

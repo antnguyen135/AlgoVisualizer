@@ -1,5 +1,5 @@
 :root {
-	--primary: #D81E5B;
+	--primary: #0e8999;
 	--primary2:rgb(117, 30, 216);
 	--secondary: #8A4EFC;
 	--light: #EEE;
@@ -10,7 +10,7 @@
 .grid {
 	margin: auto;
 	margin-top: 40px;
-	width: 60%;
+	/* width: 60%; */
 }
 
 .button {
