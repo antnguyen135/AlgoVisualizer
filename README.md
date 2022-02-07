@@ -10,7 +10,7 @@ Here is an example of Dijkstra's algorithm being run on a graph with no barriers
 Here is the result of running Astar with no barriers<br />
 <img src = "images/Astar.png" width="500"><br />
 Users also have the ability to create barriers by clicking and dragging the mouse or they can select the options at the top for custom graphs.<br />
-Here is a diagram of the options<br />
+Here are diagrams of the options<br />
 Simple stair<br />
 <img src = "images/simpleStair.png" width="500"> <br />
 Here is the recursively built horizontal maze which always has a unique construction<br />
