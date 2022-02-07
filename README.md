@@ -14,8 +14,8 @@ Here is a diagram of the options<br />
 Simple stair<br />
 <img src = "images/simpleStair.png" width="500"> <br />
 Here is the recursively built horizontal maze which always has a unique construction<br />
-<img src = "images/mazeMiddle.png" width="500"> <img src = "images/mazeEnd.png" width="500"> <br />
+<img src = "images/maze1Build.png" width="500"> <img src = "images/maze1.png" width="500"> <br />
 Another horizontal maze to show Uniqueness <br />
-<img src = "images/mazeEnd2.png" width="500"> <br />
+<img src = "images/maze2.png" width="500"> <br />
 Finally, here is the result Dijkstra's algorithm being run on the second horizontal maze <br />
-<img src = "images/mazeDijResult.png" width="500"> <br />
+<img src = "images/mazeResultNew.png" width="500"> <br />
